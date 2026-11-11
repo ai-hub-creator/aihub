@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hub — инструменты, которые работают на тебя</title>
+<meta name="description" content="Каталог лучших инструментов для учёбы, заработка, творчества и кода. Проверено на практике.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06060b;--panel:rgba(255,255,255,.04);--border:rgba(255,255,255,.09);
+  --text:#ececf5;--muted:#9a9ab5;--p1:#7c3aed;--p2:#06b6d4;--p3:#ec4899;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+/* Фикс для кнопок навигации (чтобы шапка не перекрывала текст) */
+#catalog, #how { scroll-margin-top: 80px; }
+
+body{font-family:'Manrope',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.5;animation:float 20s ease-in-out infinite}
+.b1{width:520px;height:520px;background:var(--p1);top:-160px;left:-140px}
+.b2{width:480px;height:480px;background:var(--p2);top:18%;right:-160px;animation-delay:-7s}
+.b3{width:440px;height:440px;background:var(--p3);bottom:-180px;left:28%;animation-delay:-13s}
+@keyframes float{50%{transform:translate(50px,-50px) scale(1.12)}}
+.bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(circle at 50% 0%,#000,transparent 70%);mask-image:radial-gradient(circle at 50% 0%,#000,transparent 70%);mask:radial-gradient(circle at 50% 0%,#000,transparent 70%)}
+
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(6,6,11,.55);border-bottom:1px solid var(--border)}
+.logo{font-weight:800;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.logo-mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--p1),var(--p2));display:grid;place-items:center;font-size:14px;box-shadow:0 6px 18px -6px var(--p1)}
+.nav-cta{font-size:14px;font-weight:700;color:#fff;text-decoration:none;padding:9px 18px;border-radius:999px;background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 8px 22px -10px var(--p1);transition:.25s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px var(--p1)}
+
+.hero{max-width:1000px;margin:0 auto;padding:96px 24px 56px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;margin-bottom:28px;border:1px solid var(--border);border-radius:999px;background:var(--panel);font-size:13px;font-weight:600;color:var(--muted);animation:fadeUp .8s ease both}
+.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+h1{font-size:clamp(2.1rem,6.5vw,4.1rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;animation:fadeUp .8s .1s ease both}
+.grad{background:linear-gradient(100deg,#a78bfa,#22d3ee,#f472b6,#a78bfa);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shift 9s linear infinite}
+@keyframes shift{to{background-position:300% 0}}
+.hero p{max-width:600px;margin:22px auto 0;font-size:clamp(1rem,2vw,1.15rem);color:var(--muted);animation:fadeUp .8s .2s ease both}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px;animation:fadeUp .8s .3s ease both}
+.btn-primary,.btn-ghost{font-family:inherit;font-size:15px;font-weight:700;text-decoration:none;padding:14px 28px;border-radius:14px;transition:.28s;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.btn-primary{color:#fff;background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 14px 34px -12px var(--p1);border:none}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 44px -14px var(--p1)}
+.btn-ghost{color:var(--text);border:1px solid var(--border);background:var(--panel)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.07)}
+
+.stats{display:flex;justify-content:center;gap:clamp(24px,6vw,72px);flex-wrap:wrap;margin-top:64px;animation:fadeUp .8s .4s ease both}
+.stat b{display:block;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:13px;color:var(--muted);font-weight:600}
+
+.toolbar{max-width:1150px;margin:0 auto;padding:0 24px 32px;display:flex;flex-direction:column;gap:20px;align-items:center}
+.search{width:100%;max-width:480px;position:relative}
+.search input{width:100%;padding:14px 18px 14px 48px;font-family:inherit;font-size:15px;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:14px;outline:none;transition:.25s}
+.search input::placeholder{color:#6d6d88}
+.search input:focus{border-color:rgba(124,58,237,.7);box-shadow:0 0 0 4px rgba(124,58,237,.15)}
+.search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.5}
+.chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.chip{font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;padding:9px 18px;border-radius:999px;border:1px solid var(--border);background:var(--panel);color:var(--muted);transition:.25s}
+.chip:hover{color:#fff;border-color:rgba(255,255,255,.25);transform:translateY(-1px)}
+.chip.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 10px 26px -10px var(--p1)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;max-width:1150px;margin:0 auto;padding:0 24px 80px}
+.card{position:relative;display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid var(--border);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--p1),var(--p2),var(--p3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s;pointer-events:none}
+.card:hover{transform:translateY(-7px);box-shadow:0 24px 60px -24px rgba(124,58,237,.75)}
+.card:hover::before{opacity:1}
+.card.featured{background:linear-gradient(180deg,rgba(124,58,237,.14),rgba(255,255,255,.02))}
+.card-top{display:flex;align-items:center;justify-content:space-between}
+.icon{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,rgba(124,58,237,.28),rgba(6,182,212,.28));border:1px solid rgba(255,255,255,.1);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.card:hover .icon{transform:scale(1.12) rotate(-6deg)}
+.tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:999px;color:#c4b5fd;background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.3);transition:.25s}
+.card[data-cat="ИИ"] .tag{color:#c4b5fd;background:rgba(124,58,237,.14);border-color:rgba(124,58,237,.3)}
+.card[data-cat="Заработок"] .tag{color:#86efac;background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.3)}
+.card[data-cat="Учёба"] .tag{color:#93c5fd;background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.3)}
+.card[data-cat="Софт"] .tag{color:#fcd34d;background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.3)}
+.card[data-cat="Сервисы"] .tag{color:#67e8f9;background:rgba(6,182,212,.14);border-color:rgba(6,182,212,.3)}
+.card h3{font-size:1.22rem;font-weight:800;letter-spacing:-.02em}
+.card p{font-size:.94rem;color:var(--muted);flex-grow:1}
+.card .open{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:700;text-decoration:none;color:#fff;padding:12px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--border);transition:.25s;cursor:pointer}
+.card .open:hover{background:linear-gradient(135deg,var(--p1),var(--p2));border-color:transparent;box-shadow:0 12px 28px -12px var(--p1)}
+.card .open span{transition:transform .25s}
+.card .open:hover span{transform:translateX(4px)}
+
+.top-badge{position:absolute;top:14px;right:14px;font-size:11px;font-weight:800;letter-spacing:.04em;padding:5px 10px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#f97316,#ec4899);box-shadow:0 8px 20px -8px #ec4899;animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 8px 28px -4px #ec4899;transform:scale(1.05)}}
+.vpn{display:inline-block;margin-left:8px;font-size:11px;font-weight:700;letter-spacing:.03em;padding:3px 8px;border-radius:999px;color:#fca5a5;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.35);vertical-align:middle;white-space:nowrap}
+
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0;font-size:1.1rem}
+
+.section{max-width:1150px;margin:0 auto;padding:60px 24px}
+.section h2{text-align:center;font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;margin-bottom:14px}
+.section .sub{text-align:center;color:var(--muted);margin-bottom:48px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.step{padding:28px;border-radius:20px;background:var(--panel);border:1px solid var(--border);transition:.3s}
+.step:hover{border-color:rgba(124,58,237,.45);transform:translateY(-4px)}
+.step .num{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:15px;margin-bottom:16px;background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 8px 22px -10px var(--p1)}
+.step h4{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+.step p{font-size:.92rem;color:var(--muted)}
+
+.cta-box{max-width:900px;margin:40px auto 80px;padding:56px 32px;border-radius:28px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(6,182,212,.18));border:1px solid rgba(255,255,255,.12)}
+.cta-box::after{content:'';position:absolute;width:340px;height:340px;border-radius:50%;background:var(--p1);filter:blur(100px);opacity:.4;top:-140px;right:-80px}
+.cta-box h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:12px;position:relative}
+.cta-box p{color:var(--muted);max-width:480px;margin:0 auto 28px;position:relative}
+
+footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center;color:var(--muted);font-size:.88rem}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* Стили для модального окна */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--border);border-radius:24px;padding:32px;width:90%;max-width:400px;text-align:center;transform:translateY(20px) scale(.95);transition:transform .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 24px 60px -12px rgba(124,58,237,.4)}
+.modal-overlay.active .modal{transform:none}
+.modal h3{font-size:1.5rem;margin-bottom:8px;font-weight:800}
+.modal p{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+.modal-options{display:flex;flex-direction:column;gap:12px}
+.modal-btn{display:block;padding:14px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:#fff;text-decoration:none;font-weight:700;font-size:15px;transition:.2s;cursor:pointer}
+.modal-btn:hover{background:linear-gradient(135deg,var(--p1),var(--p2));border-color:transparent;transform:scale(1.02)}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1}
+.modal-close:hover{color:#fff}
+
+@media (max-width:600px){.hero{padding:64px 20px 40px}.nav{padding:12px 16px}.stats{gap:28px;margin-top:44px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114196455', 'ym');
+
+    ym(114196455, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114196455" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</head>
+<body>
+
+<div class="bg">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<header class="nav">
+  <div class="logo"><span class="logo-mark">⚡</span> AI Hub</div>
+  <a href="#catalog" class="nav-cta">К инструментам</a>
+</header>
+
+<section class="hero">
+  <div class="badge"><span class="dot"></span> Работает 24/7 · Пока ты спишь</div>
+  <h1>Инструменты, которые<br><span class="grad">делают работу за тебя</span></h1>
+  <p>Каталог лучшего софта для учёбы, заработка, творчества и кода. Только то, что реально экономит часы — проверено на практике.</p>
+  <div class="hero-cta">
+    <a href="#catalog" class="btn-primary">Смотреть каталог <span>→</span></a>
+    <a href="#how" class="btn-ghost">Как это работает</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b data-count="21">0</b><span>инструментов</span></div>
+    <div class="stat"><b data-count="5">0</b><span>категорий</span></div>
+    <div class="stat"><b data-count="100">0</b><span>% бесплатно</span></div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="search">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="search" type="text" placeholder="Поиск по названию или описанию...">
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<main class="grid" id="catalog"></main>
+
+<section class="section" id="how">
+  <h2>Как это работает</h2>
+  <p class="sub">Никакой магии — просто правильный инструмент в нужный момент</p>
+  <div class="steps">
+    <div class="step reveal"><div class="num">1</div><h4>Выбери задачу</h4><p>Домашка, код, картинка для аватарки или первые деньги на фрилансе — найди категорию и инструмент.</p></div>
+    <div class="step reveal"><div class="num">2</div><h4>Открой и попробуй</h4><p>Большинство сервисов дают бесплатный доступ или триал. Начни с бесплатного — этого хватит для старта.</p></div>
+    <div class="step reveal"><div class="num">3</div><h4>Экономь время</h4><p>Пока нейросеть делает рутину, ты занимаешься тем, что реально двигает тебя вперёд.</p></div>
+  </div>
+</section>
+
+<section class="cta-box reveal">
+  <h2>Сайт обновляется автоматически</h2>
+  <p>Новые инструменты добавляются по мере появления. Закладка в браузере — твой лучший друг.</p>
+  <a href="#catalog" class="btn-primary">Наверх к каталогу <span>↑</span></a>
+</section>
+
+<footer>© 2026 AI Hub · Работает в автоматическом режиме 24/7</footer>
+
+<!-- Модальное окно -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3 id="modal-title"></h3>
+    <p>Выберите платформу для перехода:</p>
+    <div class="modal-options" id="modal-options"></div>
+  </div>
+</div>
+
+<script>
+const TOOLS = [
+  { name:"ChatGPT", icon:"💬", category:"ИИ", featured:true, vpn:true,
+    desc:"Поможет с домашкой, объяснит сложную тему, напишет текст. Универсальный помощник №1.",
+    link:"https://chatgpt.com" },
+  { name:"DeepSeek", icon:"🧠", category:"ИИ", featured:true,
+    desc:"Мощная и бесплатная нейросеть для кода. Поможет с программированием, логикой и учебными задачами.",
+    hasModal:true,
+    options:[
+      { label:"🌐 Открыть в браузере (ПК)", url:"https://chat.deepseek.com" },
+      { label:"📱 Скачать на Android", url:"https://play.google.com/store/apps/details?id=com.deepseek.chat" },
+      { label:"🍏 Скачать на iPhone", url:"https://apps.apple.com/app/deepseek-ai-assistant/id6473053039" }
+    ]},
+  { name:"Midjourney", icon:"🎨", category:"ИИ",
+    desc:"Генератор картинок по описанию. Аватарки, иллюстрации, обои — за минуту.",
+    link:"https://www.midjourney.com" },
+  { name:"Claude", icon:"📝", category:"ИИ", vpn:true,
+    desc:"Отлично работает с длинными текстами: конспекты, рефераты, разбор статей.",
+    link:"https://claude.ai" },
+  { name:"Perplexity", icon:"🔎", category:"ИИ",
+    desc:"Поисковик с ИИ: отвечает на вопросы и сразу даёт источники.",
+    link:"https://www.perplexity.ai" },
+
+  { name:"Kwork", icon:"💼", category:"Заработок", featured:true,
+    desc:"Биржа фриланса: простые задачи и первые деньги даже без опыта. Начни с малого — и расти.",
+    link:"https://kwork.ru" },
+  { name:"Admitad", icon:"💰", category:"Заработок", featured:true,
+    desc:"Партнёрская сеть: рекламируй сервисы, получай процент с продаж.",
+    link:"https://www.admitad.com" },
+  { name:"YouDo", icon:"🛠️", category:"Заработок",
+    desc:"Сервис бытовых и цифровых задач. Можно брать заказы на час-два.",
+    link:"https://youdo.com" },
+  { name:"Upwork", icon:"🌍", category:"Заработок", vpn:true,
+    desc:"Международный фриланс. Высокие чеки, но нужен английский.",
+    link:"https://www.upwork.com" },
+
+  { name:"Notion", icon:"🗂️", category:"Учёба",
+    desc:"Умные заметки: расписание, конспекты, планы проектов в одном месте.",
+    hasModal:true,
+    options:[
+      { label:"🌐 Открыть в браузере (ПК)", url:"https://www.notion.so" },
+      { label:"📱 Скачать на Android", url:"https://play.google.com/store/apps/details?id=notion.id" },
+      { label:"🍏 Скачать на iPhone", url:"https://apps.apple.com/app/notion-notes-docs-tasks/id1232780281" }
+    ]},
+  { name:"Gamma", icon:"📊", category:"Учёба",
+    desc:"Создаёт красивые презентации из текста за пару минут. Спасает перед защитой.",
+    link:"https://gamma.app" },
+  { name:"Quizlet", icon:"🎯", category:"Учёба",
+    desc:"Карточки и тренажёры для запоминания. Готовься к контрольным эффективнее.",
+    hasModal:true,
+    options:[
+      { label:"🌐 Открыть в браузере (ПК)", url:"https://quizlet.com" },
+      { label:"📱 Скачать на Android", url:"https://play.google.com/store/apps/details?id=com.quizlet.quizletandroid" },
+      { label:"🍏 Скачать на iPhone", url:"https://apps.apple.com/app/quizlet-flashcards/id546473125" }
+    ]},
+  { name:"Grammarly", icon:"✍️", category:"Учёба",
+    desc:"Проверка грамматики и стиля английского текста. Для сочинений — топ.",
+    link:"https://www.grammarly.com" },
+
+  { name:"VS Code", icon:"💻", category:"Софт", featured:true,
+    desc:"Бесплатный редактор кода с подсветкой и расширениями. Главный инструмент любого разработчика.",
+    link:"https://code.visualstudio.com" },
+  { name:"OBS Studio", icon:"🎥", category:"Софт",
+    desc:"Запись экрана, стримы и обучающие ролики. Всё, что нужно для создания видео.",
+    link:"https://obsproject.com" },
+  { name:"Figma", icon:"🎨", category:"Софт",
+    desc:"Дизайн интерфейсов и картинок в браузере. Бесплатно для личных проектов.",
+    link:"https://www.figma.com" },
+  { name:"Canva", icon:"🖌️", category:"Софт",
+    desc:"Обложки, посты, аватарки — без навыков дизайна. Есть бесплатный тариф.",
+    hasModal:true,
+    options:[
+      { label:"🌐 Открыть в браузере (ПК)", url:"https://www.canva.com" },
+      { label:"📱 Скачать на Android", url:"https://play.google.com/store/apps/details?id=com.canva.editor" },
+      { label:"🍏 Скачать на iPhone", url:"https://apps.apple.com/app/canva-design-photo-video/id897446215" }
+    ]},
+
+  { name:"GitHub", icon:"🐙", category:"Сервисы", featured:true,
+    desc:"Хостинг кода и бесплатный хостинг сайтов (GitHub Pages). Здесь можно запустить свой проект за вечер.",
+    link:"https://github.com" },
+  { name:"Netlify", icon:"🚀", category:"Сервисы",
+    desc:"Альтернатива GitHub Pages для сайтов. Свой домен, автоматический деплой.",
+    link:"https://www.netlify.com" },
+  { name:"Cloudflare", icon:"🌐", category:"Сервисы",
+    desc:"Бесплатный домен, защита и ускорение сайта. Пригодится любому, кто запускает свой проект.",
+    link:"https://www.cloudflare.com" },
+  { name:"Telegram", icon:"✈️", category:"Сервисы",
+    desc:"Боты, каналы и автоматизация. Отличная площадка для продвижения и заработка.",
+    hasModal:true,
+    options:[
+      { label:"🌐 Открыть в браузере (ПК)", url:"https://web.telegram.org" },
+      { label:"📱 Скачать на Android", url:"https://play.google.com/store/apps/details?id=org.telegram.messenger" },
+      { label:"🍏 Скачать на iPhone", url:"https://apps.apple.com/app/telegram-messenger/id686449807" }
+    ]}
+];
+
+const grid = document.getElementById('catalog');
+const chipsEl = document.getElementById('chips');
+const searchEl = document.getElementById('search');
+const CATEGORIES = ['Все', ...new Set(TOOLS.map(t => t.category))];
+let activeCat = 'Все';
+let query = '';
+let noVpnOnly = false;
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+}, { threshold: .12 });
+
+function renderChips(){
+  chipsEl.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (cat === activeCat ? ' active' : '');
+    b.textContent = cat;
+    b.addEventListener('click', () => { activeCat = cat; renderChips(); renderGrid(); });
+    chipsEl.appendChild(b);
+  });
+  const vpnChip = document.createElement('button');
+  vpnChip.className = 'chip' + (noVpnOnly ? ' active' : '');
+  vpnChip.textContent = '🚫 Без ВПН';
+  vpnChip.addEventListener('click', () => { noVpnOnly = !noVpnOnly; renderChips(); renderGrid(); });
+  chipsEl.appendChild(vpnChip);
+}
+
+function renderGrid(){
+  const q = query.trim().toLowerCase();
+  const list = TOOLS.filter(t =>
+    (activeCat === 'Все' || t.category === activeCat) &&
+    (!q || t.name.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q)) &&
+    (!noVpnOnly || !t.vpn)
+  );
+  grid.innerHTML = '';
+  if (!list.length){
+    grid.innerHTML = '<p class="empty">Ничего не найдено 🤷 Попробуй другой запрос</p>';
+    return;
+  }
+  list.forEach((t, i) => {
+    const card = document.createElement('article');
+    card.className = 'card reveal' + (t.featured ? ' featured' : '');
+    card.dataset.cat = t.category;
+    card.style.transitionDelay = (i * 45) + 'ms';
+    
+    // Если есть hasModal, кнопка вызывает модалку, иначе - обычная ссылка
+    const btnHtml = t.hasModal 
+      ? `<button class="open" onclick="openModal('${t.name}')">Выбрать платформу <span>→</span></button>`
+      : `<a class="open" href="${t.link}" target="_blank" rel="noopener">Открыть <span>→</span></a>`;
+
+    card.innerHTML = `
+      ${t.featured ? '<span class="top-badge">🔥 Топ</span>' : ''}
+      <div class="card-top">
+        <div class="icon">${t.icon}</div>
+        <span class="tag">${t.category}</span>
+      </div>
+      <h3>${t.name}${t.vpn ? '<span class="vpn">нужен ВПН</span>' : ''}</h3>
+      <p>${t.desc}</p>
+      ${btnHtml}
+    `;
+    grid.appendChild(card);
+  });
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.card.reveal:not(.in)').forEach(el => observer.observe(el));
+  });
+}
+
+// Логика модального окна
+const modalOverlay = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalOptions = document.getElementById('modal-options');
+
+function openModal(toolName) {
+  const tool = TOOLS.find(t => t.name === toolName);
+  if (!tool || !tool.options) return;
+  
+  modalTitle.textContent = tool.name;
+  modalOptions.innerHTML = '';
+  
+  tool.options.forEach(opt => {
+    const a = document.createElement('a');
+    a.className = 'modal-btn';
+    a.href = opt.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = opt.label;
+    modalOptions.appendChild(a);
+  });
+  
+  modalOverlay.classList.add('active');
+}
+
+function closeModal() {
+  modalOverlay.classList.remove('active');
+}
+
+// Закрытие по клику вне окна
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeModal();
+});
+
+searchEl.addEventListener('input', e => { query = e.target.value; renderGrid(); });
+
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = +el.dataset.count;
+    const dur = 1200;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+document.querySelectorAll('.step.reveal, .cta-box.reveal').forEach(el => observer.observe(el));
+
+renderChips();
+renderGrid();
+animateCounters();
+</script>
+</body>
+</html>
